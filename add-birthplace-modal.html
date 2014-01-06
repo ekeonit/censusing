@@ -1,0 +1,16 @@
+﻿<form ng-submit="ok()">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" class="form-control" id="name" required="" ng-model="name">
+        </div>
+        <div class="form-group">
+            <label for="birthplace">Your Birthplace</label>
+            <input type="text" class="form-control" id="birthplace" required="" ng-model="birthplace" typeahead="place for place in getPlaces($viewValue)" typeahead-editable="false">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
