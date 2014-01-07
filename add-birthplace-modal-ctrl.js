@@ -1,10 +1,25 @@
 ﻿
 angular.module('censusing')
-    .controller('AddBirthplaceModalCtrl', ['$scope', '$modalInstance', '$http',
-        function ($scope, $modalInstance, $http) {
+    .controller('AddBirthplaceModalCtrl', ['$scope', '$modalInstance', '$http', 'Birthplaces', 'Places',
+        function ($scope, $modalInstance, $http, Birthplaces, Places) {
+
+            // hack for angular-ui modal form scope bug
+            $scope.form = {};
 
             $scope.ok = function() {
-                $modalInstance.close(true);
+
+                var birthplace = {
+                    personName: $scope.form.personName,
+                    placeName: $scope.form.birthPlace.formatted_address,
+                    lat: $scope.form.birthPlace.geometry.location.lat,
+                    lng: $scope.form.birthPlace.geometry.location.lng
+                };
+
+                Birthplaces
+                    .create(birthplace)
+                    .then(function(response) {
+                        $modalInstance.close(true);                    
+                    });
             };
 
             $scope.cancel = function() {
@@ -12,18 +27,7 @@ angular.module('censusing')
             };
 
             $scope.getPlaces = function(value) {
-                return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-                    params: {
-                        address: value,
-                        sensor: false
-                    }
-                }).then(function(response) {
-                    var places = [];
-                    angular.forEach(response.data.results, function(item) {
-                        places.push(item.formatted_address + ' (' + item.geometry.location.lat + '/' + item.geometry.location.lng + ')');
-                    });
-                    return places;
-                });
+                return Places.get(value);
             };
         }
     ]);

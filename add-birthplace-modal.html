@@ -1,12 +1,12 @@
-﻿<form ng-submit="ok()">
+﻿<form name="form.form" ng-submit="ok()">
     <div class="modal-body">
         <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" class="form-control" id="name" required="" ng-model="name">
+            <label for="personName">Your Name</label>
+            <input type="text" class="form-control" id="personName" required="" ng-model="form.personName">
         </div>
         <div class="form-group">
             <label for="birthplace">Your Birthplace</label>
-            <input type="text" class="form-control" id="birthplace" required="" ng-model="birthplace" typeahead="place for place in getPlaces($viewValue)" typeahead-editable="false">
+            <input type="text" class="form-control" id="birthplace" ng-model="form.birthPlace" required="" typeahead="place as place.formatted_address for place in getPlaces($viewValue)" typeahead-editable="false">
         </div>
     </div>
     <div class="modal-footer">
@@ -14,3 +14,5 @@
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </form>
+
+{{hint}}
