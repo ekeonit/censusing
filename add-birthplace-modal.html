@@ -2,7 +2,7 @@
     <div class="modal-body">
         <div class="form-group">
             <label for="personName">Your Name</label>
-            <input type="text" class="form-control" id="personName" required="" ng-model="form.personName">
+            <input type="text" class="form-control" id="personName" required="" ng-model="form.personName" autofocus>
         </div>
         <div class="form-group">
             <label for="birthplace">Your Birthplace</label>
@@ -14,5 +14,3 @@
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </form>
-
-{{hint}}

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="censusing">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Where were you born?</title>
 
@@ -17,18 +17,71 @@
             </div>
         </div>
         <div class="col-md-6">
-            
+            <div class="views">
+                <br/>
+
+                <button class="btn btn-lrg" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
+                <button class="btn btn-lrg" ng-click="showTable = !showTable">{{ showTable ? 'Hide Table' : 'Show Table' }}</button>
+
+                <section id="map">
+                    <div ui-map="myMap" ui-options="mapOptions" class="map-canvas"></div>
+                </section>
+
+                <div collapse="!showTable">
+                    <table class="table table-bordered table-hover birthPlaces">
+                        <thead>
+                            <th>Name</th>
+                            <th>Place</th>
+                            <th>Latitude</th>
+                            <th>Longitute</th>
+                            <th>Added On</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="place in birthPlaces | orderBy:'createdAt':true">
+                                <td>
+                                    {{ place.personName }}
+                                </td>
+                                <td>
+                                    {{ place.placeName }}
+                                </td>
+                                <td>
+                                    {{ place.lat }}
+                                </td>
+                                <td>
+                                    {{ place.lng }}
+                                </td>
+                                <td>
+                                    {{ place.createdAt | date:'M/d/yy h:mm a' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
 
     </div>
 
+    <script>
+
+        function onGoogleReady() {
+          angular.bootstrap(document.getElementsByTagName("body")[0], ['censusing']);
+        }
+
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap.min.js"></script>
+    <script src="event.js"></script>
+    <script src="ui-map.js"></script>
     <script src="app.js"></script>
     <script src="censusing-ctrl.js"></script>
     <script src="add-birthplace-modal-ctrl.js"></script>
     <script src="birthplaces-srv.js"></script>
     <script src="places-srv.js"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=onGoogleReady"></script>
 
 </body>
 </html>

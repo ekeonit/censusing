@@ -1,2 +1,2 @@
 ﻿
-angular.module('censusing', ['ui.bootstrap']);
+angular.module('censusing', ['ui.bootstrap', 'ui.map']);

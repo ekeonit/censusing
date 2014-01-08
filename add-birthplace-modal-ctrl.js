@@ -12,13 +12,14 @@ angular.module('censusing')
                     personName: $scope.form.personName,
                     placeName: $scope.form.birthPlace.formatted_address,
                     lat: $scope.form.birthPlace.geometry.location.lat,
-                    lng: $scope.form.birthPlace.geometry.location.lng
+                    lng: $scope.form.birthPlace.geometry.location.lng,
                 };
 
                 Birthplaces
                     .create(birthplace)
-                    .then(function(response) {
-                        $modalInstance.close(true);                    
+                    .then(function(createdAt) {
+                        birthplace.createdAt = createdAt;
+                        $modalInstance.close(birthplace);                    
                     });
             };
 

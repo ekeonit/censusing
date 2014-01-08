@@ -1,5 +1,6 @@
 ﻿body {
-    background-color: ivory;    
+    background-color: ivory;
+    overflow-x: hidden;    
 }
 
 .title {
@@ -9,6 +10,21 @@
     font-size: 100px;
 }
 
+.views {
+	margin-top: 75px;
+}
+
+table.birthPlaces {
+	margin-top: 25px;
+	width: 98%;
+}
+
 a:link {text-decoration:none;}
 a:visited {text-decoration:none;}
 a:active { text-decoration: none;}
+
+.map-canvas { 
+	height: 400px;
+	margin-top: 25px;
+	margin-right: 10px;
+}
